@@ -1,7 +1,0 @@
-<form form #f="ngForm" (ngSubmit)="onSubmit(f.value)" novalidate>
-    <mat-form-field>
-        <mat-label>User ID</mat-label>
-        <input matInput id="input1" type="text" name="userId" ngModel required> 
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!f.valid">Login</button>
-</form>

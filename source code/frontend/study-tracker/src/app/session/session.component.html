@@ -1,0 +1,65 @@
+
+    <div class="session-window" id="session-window">
+        <div class="session-card-container" *ngFor="let session of sessions">
+            <div class="session-card">
+                <button type="button" class="edit-button" name="edit-button"><span class="material-symbols-outlined">
+                    edit
+                    </span></button>
+                <button type="button" class="delete-button" name="delete-button"><span class="material-symbols-outlined">
+                    delete
+                    </span></button>
+
+                <body class="card-body">
+                    <p class="big-font">{{session.name}}</p>
+                </body>
+                <button type="button" class="start-button" [routerLink]="'session/' + session?.id">start</button>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <!--TIMER CONFIGURATION CONTAINER |||| GOT SWAPPED OUT WITH A COMPONENT-->
+
+    
+
+    <!--SUMMARY CONFIGURATION COMPONENT
+
+      <app-timer></app-timer>
+     <app-summary></app-summary>-->
+    <!--  <div class="session-summary" id="session-summary">
+        <div>
+          <h1 class="session-summary-head">Good Job</h1>
+        </div>
+        <br>
+        <div>
+          <h2 id="session-completed-tasks">Completed tasks</h2>
+          <div *ngFor="let goal of goals" id="session-completed-tasks-goals">
+            <input type="checkbox" [value]="goal">{{ goal }}
+          </div>
+        </div>
+        <br>
+        <div>
+          <h2 id="session-focus">Level of focus</h2>
+          <div id="session-focus-level">
+                <label for="session-focus-level-in">value: </label>
+                <input id="session-focus-level-in" type="range" min="0" max="10" value="0" title="satisfaction-level" (input)="showFocusInput()">
+                <p id="session-focus-level-out">0</p>
+          </div>
+        </div>
+        <br>
+        <div>
+          <h2 id="session-distractions">Distractions</h2>
+            <div name="" id="session-options">
+              <input type="checkbox" value="phone"> phone
+              <input type="checkbox" value="people"> people
+              <input type="checkbox" value="other"> other                
+            </div>
+        </div>
+        <button type="button" id="session-summary-track-button" (click)="track()">track</button>
+        
+      </div> -->
+      
+      
+      
+      
