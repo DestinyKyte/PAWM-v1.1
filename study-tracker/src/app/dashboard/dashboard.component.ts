@@ -1,0 +1,290 @@
+import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment.development';
+import { Chart} from 'angular-highcharts';
+import * as Highcharts from 'highcharts'
+import { MyHttpService } from './service/my-http.service';
+import { DataSharingSerivce } from '../services/shared.service';
+
+//TODO refactor the code so that it is not procedural but oop
+//TODO being able to see a daily and weekly view of previous years
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
+})
+export class DashboardComponent{
+  
+  dayChart = new Chart({
+    credits: {
+      enabled: false
+    },
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Hours of day'
+    },
+    xAxis:{
+      categories:["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", 
+                  "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
+    },
+    series: [
+      {
+        name: 'Quality',
+        data: [],
+        color: "Red"            
+      } as any
+    ]
+  })
+  
+  weekChart = new Chart({
+    credits: {
+      enabled: false
+    },
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Days of week'
+    },
+    xAxis:{
+      categories:["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", ]
+    },
+    series: [
+      {
+        name: 'Quality',
+        data: [],
+        color: "Red"
+      } as any
+    ]
+  })
+
+  yearChart = new Chart({
+    credits: {
+      enabled: false
+    },
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Months of year'
+    },
+    xAxis:{
+      categories:["Jenuary", "February", "March", "April", "May", "June", 
+                  "July", "August", "September", "October", "November", "December"]
+    },  
+    series: [
+      {
+        name: 'Quality',
+        data: [],
+        color: "Red"
+      } as any
+    ]
+  })
+
+  userId : any
+  
+  actualData: any
+  
+  qualitySerie: any
+  quantitySerie: any
+  completedTasksSerie: any
+  
+  //variables that store the values of the last timestamp
+  year: any
+  weekOfTheYear: any
+  dayOfTheYear: any
+
+  setQuality:any
+  setQuantity:any
+  setCompletedTasks:any
+
+  //variables that store the state of each chart
+  dayOfFirstChart: any
+  weekOfSecondChart: any 
+  yearOfThirdChart: any
+  typeOfDataOfFirstChart: any
+  typeOfDataOfSecondChart: any
+  typeOfDataOfThirdChart: any
+
+  constructor(private service: MyHttpService, private datacenter: DataSharingSerivce){
+
+    this.userId = 1
+
+    this.qualitySerie = {
+      name: "Quality",
+      data: [],
+      color: "Red",
+      type: 'line'
+    }
+    
+    this.quantitySerie = {
+      name: "Quantity",
+      data: [],
+      color: "Blue",
+      type: 'line'
+    }
+
+    this.completedTasksSerie = {
+      name: "Completed tasks",
+      data: [],
+      color: "Green",
+      type: 'line'
+    }
+
+    this.performTimestamp()
+    
+    this.dayOfFirstChart = this.dayOfTheYear
+    this.weekOfSecondChart = this.weekOfTheYear
+    this.yearOfThirdChart = this.year
+
+    this.typeOfDataOfFirstChart = "quality"
+    this.typeOfDataOfSecondChart = "quality"
+    this.typeOfDataOfThirdChart = "quality"
+    
+    this.showDailyChart(this.typeOfDataOfFirstChart, this.year, this.dayOfFirstChart, this.userId)
+    this.showWeeklyChart(this.typeOfDataOfSecondChart, this.year, this.weekOfSecondChart, this.userId)
+    this.showAnnualChart(this.typeOfDataOfThirdChart, this.yearOfThirdChart, this.userId)
+
+    this.setQuality = "quality"
+    this.setQuantity = "quantity"
+    this.setCompletedTasks = "completedTasks"
+
+  }
+
+  ngOnDestroy(){
+    this.datacenter.dashboardCounter += 3
+  }
+
+  showDailyChart(typeOfData: string, year: number, dayOfTheYear: number, userId: number){
+    Highcharts.charts[this.datacenter.dashboardCounter]?.series[0].remove()
+
+    if(typeOfData === "quality"){     
+      Highcharts.charts[this.datacenter.dashboardCounter]?.addSeries(this.qualitySerie, true, undefined)
+      this.typeOfDataOfFirstChart = "quality"
+    } else if (typeOfData === "quantity"){
+      Highcharts.charts[this.datacenter.dashboardCounter]?.addSeries(this.quantitySerie, true, undefined)
+      this.typeOfDataOfFirstChart = "quantity"
+    } else if (typeOfData === "completedTasks"){
+      Highcharts.charts[this.datacenter.dashboardCounter]?.addSeries(this.completedTasksSerie, true, undefined)
+      this.typeOfDataOfFirstChart = "completedTasks"
+    }
+
+    this.service.get(environment.apiBaseUrl+"/dashboard/dataOfDay/"+typeOfData+"/"+year+"/"+dayOfTheYear+"/"+userId).subscribe((dataFromBackend)=>{     
+      this.actualData = dataFromBackend
+      Highcharts.charts[this.datacenter.dashboardCounter]?.series[0].setData(this.actualData)
+    })
+  }
+
+  showWeeklyChart(typeOfData: string, year: number, weekOfTheYear: number, userId: number){
+    Highcharts.charts[this.datacenter.dashboardCounter+1]?.series[0].remove()
+    
+
+    if(typeOfData === "quality"){     
+      Highcharts.charts[this.datacenter.dashboardCounter+1]?.addSeries(this.qualitySerie, true, undefined)
+      this.typeOfDataOfSecondChart = "quality"
+    } else if (typeOfData === "quantity"){
+      Highcharts.charts[this.datacenter.dashboardCounter+1]?.addSeries(this.quantitySerie, true, undefined)
+      this.typeOfDataOfSecondChart = "quantity"
+    } else if (typeOfData === "completedTasks"){
+      Highcharts.charts[this.datacenter.dashboardCounter+1]?.addSeries(this.completedTasksSerie, true, undefined)
+      this.typeOfDataOfSecondChart = "completedTasks"
+    }
+
+    this.service.get(environment.apiBaseUrl+"/dashboard/dataOfWeek/"+typeOfData+"/"+year+"/"+weekOfTheYear+"/"+userId).subscribe((dataFromBackend)=>{     
+      this.actualData = dataFromBackend
+      Highcharts.charts[this.datacenter.dashboardCounter+1]?.series[0].setData(this.actualData)
+    })
+  }
+
+  showAnnualChart(typeOfData: string, year: number, userId: number){
+    Highcharts.charts[this.datacenter.dashboardCounter+2]?.series[0].remove()
+
+    if(typeOfData === "quality"){     
+      Highcharts.charts[this.datacenter.dashboardCounter+2]?.addSeries(this.qualitySerie, true, undefined)
+      this.typeOfDataOfThirdChart = "quality"
+    } else if (typeOfData === "quantity"){
+      Highcharts.charts[this.datacenter.dashboardCounter+2]?.addSeries(this.quantitySerie, true, undefined)
+      this.typeOfDataOfThirdChart = "quantity"
+    } else if (typeOfData === "completedTasks"){
+      Highcharts.charts[this.datacenter.dashboardCounter+2]?.addSeries(this.completedTasksSerie, true, undefined)
+      this.typeOfDataOfThirdChart = "completedTasks"
+    }
+
+    this.service.get(environment.apiBaseUrl+"/dashboard/dataOfYear/"+typeOfData+"/"+year+"/"+userId).subscribe((dataFromBackend)=>{     
+      this.actualData = dataFromBackend
+      Highcharts.charts[this.datacenter.dashboardCounter+2]?.series[0].setData(this.actualData)
+    })
+  }
+
+  eventListenerOfFirstChart(typeOfData : string){
+    this.showDailyChart(typeOfData, this.year, this.dayOfFirstChart, this.userId)
+  }
+
+  eventListenerOfSecondChart(typeOfData : string){
+    this.showWeeklyChart(typeOfData, this.year, this.weekOfSecondChart, this.userId)
+  }
+
+  eventListenerOfThirdChart(typeOfData : string){
+    this.showAnnualChart(typeOfData, this.yearOfThirdChart, this.userId)
+  }
+  
+  previousDay(){
+    if(this.dayOfFirstChart > 1){
+      this.dayOfFirstChart = this.dayOfFirstChart - 1
+      this.showDailyChart(this.typeOfDataOfFirstChart, this.year, this.dayOfFirstChart, this.userId)
+    } 
+  }
+
+  nextDay(){
+    if(this.dayOfFirstChart < 365){
+      this.dayOfFirstChart = this.dayOfFirstChart + 1
+      this.showDailyChart(this.typeOfDataOfFirstChart, this.year, this.dayOfFirstChart, this.userId)
+    }
+  }
+
+  previousWeek(){
+    if(this.weekOfSecondChart > 1){
+      this.weekOfSecondChart = this.weekOfSecondChart - 1
+      this.showWeeklyChart(this.typeOfDataOfSecondChart, this.year, this.weekOfSecondChart, this.userId)
+    }
+  }
+
+  nextWeek(){
+    if(this.weekOfSecondChart < 52){
+      this.weekOfSecondChart = this.weekOfSecondChart + 1
+      this.showWeeklyChart(this.typeOfDataOfSecondChart, this.year, this.weekOfSecondChart, this.userId)
+    }
+  }
+
+  previousYear(){
+    this.yearOfThirdChart = this.yearOfThirdChart - 1
+    this.showAnnualChart(this.typeOfDataOfThirdChart, this.yearOfThirdChart, this.userId)
+  }
+
+  nextYear(){
+    this.yearOfThirdChart = this.yearOfThirdChart + 1
+    this.showAnnualChart(this.typeOfDataOfThirdChart, this.yearOfThirdChart, this.userId)
+  }
+
+  performTimestamp(){
+    let timestamp = new Date()
+    this.year = timestamp.getFullYear()
+    this.computeWeekOfTheYear()
+    this.computeDayOfTheYear()
+  }
+  
+  computeWeekOfTheYear(){
+    let currentDate = new Date();
+    let startDate = new Date(currentDate.getFullYear(), 0, 1);
+    //siccome lato frontend la settimana inizia di lunedi', devo aggiungere 1 al risultato di getDay per sincronizzarlo con il backend che invece fa iniziare la settimana di domenica
+    this.weekOfTheYear = Math.ceil((((currentDate.getTime() - startDate.getTime()) / 86400000) + startDate.getDay() + 1) / 7);
+  }
+
+  computeDayOfTheYear(){
+    let currentDate = new Date()
+    let startDate = new Date(currentDate.getFullYear(), 0, 0)
+    this.dayOfTheYear = Math.floor((currentDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24)
+  }
+
+}

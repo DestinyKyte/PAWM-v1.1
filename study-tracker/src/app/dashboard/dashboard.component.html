@@ -1,0 +1,28 @@
+<div class="charts">
+    <button (click)="eventListenerOfFirstChart(setQuality)">Quality</button>
+    <button (click)="eventListenerOfFirstChart(setQuantity)">Quantity</button>
+    <button (click)="eventListenerOfFirstChart(setCompletedTasks)">Completed tasks</button>
+    <br><br> 
+    <button (click)="previousDay()">&lt;=</button>
+    <button (click)="nextDay()">=&gt;</button>
+    <p>Day of the year: {{this.dayOfFirstChart}}</p>     
+    <div class="line" [chart]="dayChart"></div>
+
+    <button (click)="eventListenerOfSecondChart(setQuality)">Quality</button>
+    <button (click)="eventListenerOfSecondChart(setQuantity)">Quantity</button>
+    <button (click)="eventListenerOfSecondChart(setCompletedTasks)">Completed tasks</button>
+    <br><br>
+    <button (click)="previousWeek()">&lt;=</button>
+    <button (click)="nextWeek()">=&gt;</button>
+    <p>Week of the year: {{this.weekOfSecondChart}}</p> 
+    <div class="line" [chart]="weekChart"></div>
+    
+    <button (click)="eventListenerOfThirdChart(setQuality)">Quality</button>
+    <button (click)="eventListenerOfThirdChart(setQuantity)">Quantity</button>
+    <button (click)="eventListenerOfThirdChart(setCompletedTasks)">Completed tasks</button>
+    <br><br>
+    <button (click)="previousYear()">&lt;=</button>
+    <button (click)="nextYear()">=&gt;</button>
+    <p>Year: {{this.yearOfThirdChart}}</p>
+    <div class="line" [chart]="yearChart"></div>
+</div>
