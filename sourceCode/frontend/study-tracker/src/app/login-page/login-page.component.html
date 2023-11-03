@@ -1,0 +1,26 @@
+<div [routerLink]="'/login'">
+    <p>welcome to login</p>
+    <form #loginform="ngForm" class="form-signin" (ngSubmit)="onSubmit(loginform.value)">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <p>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="email" class="form-control" placeholder="Username" required autofocus [(ngModel)]="loginModel.email">
+      </p>
+      <p>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="loginModel.password">
+      </p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+    <h2>Secured endpoint calls</h2>
+    <button (click)="onClick()">call secured sayHello()</button>
+    
+    <br>
+    <h2>Errors section</h2>
+    <button (click)="onClick2()">throw general error</button>
+    <br>
+    <p>click the following button before logging in, it calls secured sayHello()</p>
+    <button (click)="onClick3()">throw http 403 forbidden error</button>
+
+  </div>

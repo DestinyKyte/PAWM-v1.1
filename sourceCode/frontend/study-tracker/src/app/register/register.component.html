@@ -1,0 +1,26 @@
+<div [routerLink]="'/register'">
+    <p>welcome to registration</p>
+    <form #regform="ngForm" class="form-signin" (ngSubmit)="onSubmit(regform.value)">
+      <h2 class="form-signin-heading">Please complete the registration form</h2>
+      <p>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="email" class="form-control" placeholder="Username" required autofocus ngModel>
+      </p>
+
+      <p>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required ngModel>
+      </p>
+    
+      <p>
+        <label for="firstName" class="sr-only">firstName</label>
+        <input type="text" id="firstName" name="firstname" class="form-control" placeholder="firstName" required autofocus ngModel>
+      </p>
+
+      <p>
+        <label for="lastName" class="sr-only">lastName</label>
+        <input type="text" id="lastName" name="lastname" class="form-control" placeholder="lastName" required ngModel>
+      </p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">register</button>
+    </form>
+  </div> 

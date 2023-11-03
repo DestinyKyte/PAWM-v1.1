@@ -1,0 +1,66 @@
+.navbar{
+    background-color: rgb(30, 179, 216);
+    position: relative;
+    display: flex;
+    width: clamp(950px,100%, 100vw);
+
+    height: 90px;
+    margin-left: 0.01%;
+    margin-right: 0.01%;
+
+    align-items: center;
+    justify-content: space-between;
+    
+    
+   
+}
+.site-name{
+    padding: 1%;
+    color: rgb(187, 255, 0);
+}
+.site-name h1{
+    font-family: cursive;
+    font-size: big;
+    font-weight: bold;
+}
+.site-menu{
+    padding: 25px 10px;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+.site-menu a{
+    text-decoration: none;
+    font-family: cursive;
+    color: rgb(236, 234, 231);
+    background-color: limegreen;
+    border-radius: 15px 100px;
+    padding: 15px 20px;
+    
+}
+.site-menu a:hover{
+    background-color: rgb(206, 191, 213);
+    color: #81087b;
+    transition: .9s;
+}
+
+.site-icon{
+    position: relative;
+    margin: 5px;
+    padding:  5px;
+    max-height: 90px;
+    align-items: center;
+    cursor: pointer;
+    
+}
+.site-icon img{
+    transform: scale(.7);
+    max-height: 80px;
+    border: 4px solid;
+    border-radius: 30px;
+    background-color: rgb(22, 214, 105);  
+}
+.site-icon img:hover{
+    background-color: rgb(206, 191, 213);
+    color: #81087b;
+    transition: .9s;
+}
