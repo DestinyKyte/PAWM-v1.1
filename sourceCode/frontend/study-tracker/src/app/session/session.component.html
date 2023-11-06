@@ -1,0 +1,17 @@
+
+<div class="session-window" id="session-window">
+    <div class="session-card-container" *ngFor="let session of sessions">  
+      <div class="session-card">
+            <button type="button" class="edit-button" name="edit-button">
+                <span class="material-symbols-outlined">edit</span>
+            </button>
+            <button type="button" class="delete-button" name="delete-button">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+            <body class="card-body">
+                <p class="big-font">{{session.name}}</p>
+            </body>
+            <button type="button" class="start-button" [routerLink]="'session/' + session?.id">start</button>
+      </div>
+  </div>
+</div>

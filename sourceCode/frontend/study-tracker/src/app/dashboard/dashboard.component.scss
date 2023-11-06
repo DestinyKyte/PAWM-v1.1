@@ -1,0 +1,27 @@
+.charts{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    place-items: center
+}
+
+.charts button{
+    color:  #000000;
+    background: linear-gradient(30deg,
+     #b4e3b8 20%, #88b2c0 40%,
+      #20b9d7 60%, #098e8e 80% );
+      margin-left: 5px;
+      border-radius: 5px;
+}
+
+.charts button:hover{
+    background-color: rgb(255, 255, 255);
+    background: rgb(206, 191, 213);
+    transition: .9s;
+}
+
+.line{
+    width: 1170px;
+    height: auto;
+    margin: 15px;
+}

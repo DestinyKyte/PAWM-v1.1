@@ -1,0 +1,159 @@
+.timer{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+   
+    width: 100%;
+    height:100%;
+    padding: 20px;
+
+    border: 2px solid rgb(15, 69, 58);
+    border-radius: 7px;
+
+    background: linear-gradient(35deg, #760a71 15%, #9d1296 28%,#7d2e79 32%,#7b3778 50%, #795b77 72%);
+}
+
+.timer-frame{
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    position: absolute;
+    top: 240px;
+    left: 250px;
+    margin: 20px;
+    border: 3px solid;
+    border-radius: 5px;
+
+    background: linear-gradient(30deg,
+     #b4e3b8 20%, #88b2c0 40%,
+      #20b9d7 60%, #098e8e 80% );
+    
+    place-content: center;
+
+    width: 360px;
+    height: 180px;
+}
+
+.timer-type{
+    opacity: .8;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+    height: 30px;
+    border: solid;
+    border-radius: 5px;
+    background-color: rgb(222, 210, 210);
+}
+
+.timer-type-work{
+    color: #3fe411;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+.timer-type-rest{
+    color: #1eda1e;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+.timer-active{
+    color: #20b9d7;
+    background-color: darkorchid;
+    margin: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+.timer-goals-list{
+    position: absolute;
+    top: 60px;
+    width: 90%;
+    height: 120px;
+    padding: 20px;
+    border: solid;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 1000;
+    overflow: scroll;
+}
+
+.timer-numbers{
+    position: absolute;
+    top: 50px;
+    left: 5%;
+    display: block;
+    border-radius: 3px;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.timer-numbers .timer_minute{
+    transition: 1s;
+}
+
+.timer-start-btn{
+    position: absolute;
+    bottom: 15px;
+    right: 135px;
+    margin: 4px;
+    border: 2px solid #20d748;
+    border-radius: 60px ;
+    color: #20d748;
+}
+
+.timer-pause-btn{
+    display: none;
+    position: absolute;
+    bottom: 15px;
+    right: 135px;
+    margin: 4px;
+    border: 2px solid #20b9d7;
+    border-radius: 60px ;
+    color: #20b9d7;
+}
+
+.timer-reset-btn{
+    position: absolute;
+    bottom: 15px;
+    right: 105px;
+    margin: 4px;
+    border: 2px solid #d72075;
+    border-radius: 60px;
+    color: #c32441;
+}
+
+.timer-rest{
+    top: 210px;
+    left: 270px;
+    position: absolute;
+    width: 260px;
+    height: 40px;
+    background: linear-gradient(30deg,
+    #b4e3b8 20%, #88b2c0 40%,
+     #20b9d7 60%, #098e8e 80% );
+    padding: 8px;
+}
+
+.timer-rest-form{
+    background-color: rgb(135, 36, 36);
+    width: 100%;
+    height: 100%;
+}
+
+.timer-rest-btn{
+    position: absolute;
+    top: 25%;
+    right:5%;
+    width: 15%;
+    height: 50%;
+    border-radius: 20px;
+}
