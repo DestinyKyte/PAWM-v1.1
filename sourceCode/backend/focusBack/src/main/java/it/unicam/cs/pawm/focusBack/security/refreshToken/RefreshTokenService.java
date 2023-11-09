@@ -2,6 +2,7 @@ package it.unicam.cs.pawm.focusBack.security.refreshToken;
 
 import it.unicam.cs.pawm.focusBack.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -22,8 +23,8 @@ public class RefreshTokenService {
             refreshToken = RefreshToken.builder()
                 .user(userRepository.findByEmail(email).isPresent()? user.get() : null)
                 .token(UUID.randomUUID().toString())
-                .expirationTime(Instant.now().plusMillis((1000*60*60*16))) //16 hour
-                .build();
+                    .expirationTime(Instant.now().plusMillis((1000*60*60*16))) // 16 hours
+                    .build();
            return refreshTokenRepo.save(refreshToken);
         }
         else throw new NullPointerException("User with email "+email+" doesn't exist.");
@@ -34,10 +35,11 @@ public class RefreshTokenService {
     }
 
     //todo to test
-    public RefreshToken verifyExpiration(RefreshToken token){
+    public RefreshToken verifyExpiration(RefreshToken token) throws CredentialsExpiredException {
         if(token.getExpirationTime().compareTo(Instant.now())<=0){
             refreshTokenRepo.delete(token);
-            throw new RuntimeException(token.getToken() + "has already expired");
+            //throw new RuntimeException(token.getToken() + "has already expired");
+            throw new CredentialsExpiredException(token.getToken() + " has already expired");
         }
         return token;
     }

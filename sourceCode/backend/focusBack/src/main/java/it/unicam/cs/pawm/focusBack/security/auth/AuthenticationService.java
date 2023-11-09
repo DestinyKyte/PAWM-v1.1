@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ AuthenticationService {
         if(repository.findByEmail(user.getEmail()).isPresent())
             throw new Exception("Email already Exists. Please login");
         repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
+        //var jwtToken = jwtService.generateToken(user);
         return RegistrationResponse
                 .builder()
                 .reply("Registration Successful")
@@ -64,7 +65,7 @@ AuthenticationService {
                 .build();
     }
 
-    public ResponseEntity<JwtAuthenticationResponse> refreshToken(RefreshTokenRequest request){
+    public ResponseEntity<JwtAuthenticationResponse> refreshToken(RefreshTokenRequest request) throws CredentialsExpiredException {
         try {
             return refreshTokenService.findByToken(request.getToken())
                     .map(refreshTokenService::verifyExpiration)

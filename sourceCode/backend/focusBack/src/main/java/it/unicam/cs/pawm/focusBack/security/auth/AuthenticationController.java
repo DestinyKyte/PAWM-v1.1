@@ -1,7 +1,9 @@
 package it.unicam.cs.pawm.focusBack.security.auth;
 
 import it.unicam.cs.pawm.focusBack.security.refreshToken.RefreshTokenRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +29,20 @@ public class AuthenticationController {
     public ResponseEntity<JwtAuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ){
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+            return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<JwtAuthenticationResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest){
-        return authenticationService.refreshToken(refreshTokenRequest);
+        try{
+            return authenticationService.refreshToken(refreshTokenRequest);
+        }
+         catch(CredentialsExpiredException ex){
+            return new ResponseEntity<>(HttpStatus.GONE);
+        }
+        catch(NullPointerException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

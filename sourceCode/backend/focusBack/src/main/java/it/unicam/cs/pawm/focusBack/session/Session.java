@@ -16,7 +16,6 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
-    @Column(unique = true)
     private String name;
     private Integer minutes;
     //TODO to remove

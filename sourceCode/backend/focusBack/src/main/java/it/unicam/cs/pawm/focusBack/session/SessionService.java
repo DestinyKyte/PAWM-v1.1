@@ -27,12 +27,14 @@ public class SessionService {
         } catch (NoSuchElementException e){
             return new ResponseEntity<>(new Session(), HttpStatus.NOT_FOUND);
         }
-        //TODO use a query instead of this loop
+       /* //TODO use a query instead of this loop
         for(Session s : userToUpdate.getSessions()){
             if(s.getName().equals(session.getName())){
                 return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
             }
-        }
+        }*/
+        if(sessionRepository.findSessionByUserIdAndSessionName(userToUpdate.getId(), session.getName()) != null)
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
         userToUpdate.getSessions().add(session);
         this.userRepository.save(userToUpdate);
@@ -47,6 +49,23 @@ public class SessionService {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user.getSessions(), HttpStatus.OK);
+    }
+    public ResponseEntity<?> deleteSession(String bearerToken, String sessionName){
+        User user;
+        try{
+            user = this.userRepository.findByEmail(this.jwtService.getEmailFromBearerToken(bearerToken)).orElseThrow();
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
+        }
+        Integer sessionID = this.sessionRepository.findSessionByUserIdAndSessionName(user.getId(), sessionName);
+        if(sessionID != null){
+            this.sessionRepository.deleteById(sessionID);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     //TODO: just for the tests

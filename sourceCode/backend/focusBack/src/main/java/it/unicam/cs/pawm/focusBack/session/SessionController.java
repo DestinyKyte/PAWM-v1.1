@@ -23,6 +23,11 @@ public class SessionController {
         return this.sessionService.getAllUserSessions(bearerToken);
     }
 
+    @DeleteMapping("/api/v1/secured/sessions/{sessionName}")
+    public ResponseEntity<?> deleteSession(@RequestHeader(HttpHeaders.AUTHORIZATION) String bearerToken, @PathVariable String sessionName){
+        return this.sessionService.deleteSession(bearerToken,sessionName);
+    }
+
     //TODO: just for the tests
     @GetMapping("/api/sessions")
     public Iterable<Session> getAllSessions(){
