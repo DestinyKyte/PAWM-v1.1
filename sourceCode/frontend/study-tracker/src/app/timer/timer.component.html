@@ -1,37 +1,28 @@
 <div class="timer" id="timer">
-
-    <!--<div class="timer-type">
-        <span class="timer-type-work" id="timer-type-work">work</span>
-        <span class="timer-type-rest" id="timer-type-rest">rest</span>
-    </div>-->
-
     <div class="timer-goals">
-        <ul class="timer-goals-list" id="timer-goals-list"></ul>
+        <ul class="timer-goals-list" id="timer-goals-list">
+          <li *ngFor="let goal of goals">{{ goal }}</li>
+        </ul>
     </div>
-    <!--<div class="timer-rest">
-        <form class="timer-rest-form">
-            <label  for="rest-input">set rest minutes:</label>
-            <input type="number" id="rest-input" placeholder="0" required min="0" max="120">
-        </form>
-    </div>-->
     <div class="timer-frame">
         <div class="timer-numbers">
-            <span class="timer_minute" id="timer_minutes">mm</span>
+            <span class="timer_minute" id="timer_minutes" >{{minutes}}</span>
             <span class="timer_semicolon">:</span>
-            <span class="timer_seconds" id="timer_seconds">ss</span>
+            <span class="timer_seconds" id="timer_seconds">{{seconds}}</span>
         </div>
         
         <div>
-            <button type="button" class="timer-start-btn" (click)="startTimer()" id="timer-start-btn">
+            <button type="button" class="timer-start-btn" (click)="startTimer()" id="timer-start-btn" [ngStyle]="{display:playDisplay}">
                 <span class="material-symbols-outlined">
                     play_circle
                 </span>
             </button>
-            <button type="button" class="timer-pause-btn" (click)="pauseTimer()" id="timer-pause-btn">
+            
+            <button type="button" class="timer-pause-btn" (click)="pauseTimer()" id="timer-pause-btn" [ngStyle]="{display:pauseDisplay}">
                 <span class="material-symbols-outlined">
                     pause
                 </span>
-            </button>
+            </button>             
 
             <button type="button" class="timer-reset-btn" (click)="resetTimer()">
                 <span class="material-symbols-outlined">

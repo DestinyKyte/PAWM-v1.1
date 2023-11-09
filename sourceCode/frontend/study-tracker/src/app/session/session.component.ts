@@ -14,6 +14,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class SessionComponent{
   sessions!: Session[];
   goals: String[] = [];
+  session: Session | undefined;
 
   constructor(
     private sessionService: WorkService, 
@@ -37,6 +38,10 @@ export class SessionComponent{
         this.datacenter.setAllSessions(this.sessions)
       }
     })
+  }
+
+  public deleteSession(session: Session){
+    this.sessionService.deleteSession(session);
   }
 
   openSnackBar(message: string) {

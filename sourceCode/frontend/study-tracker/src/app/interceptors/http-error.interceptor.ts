@@ -10,6 +10,7 @@ import { Observable, catchError} from 'rxjs';
 import { LoginService } from '../services/login.service';
 import { HttpRecallService } from '../services/http-recall.service';
 import { LoggingService } from '../services/logging.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorCatchingInterceptor implements HttpInterceptor {
@@ -17,7 +18,8 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
   constructor(
     private authenticationService: LoginService,
     private redirectService: HttpRecallService,
-    private loggingService: LoggingService
+    private loggingService: LoggingService,
+    private router: Router
   ) {}
   
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,6 +33,8 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
         }
         //refresh token not in the db
         if(error.status === 401){ 
+          sessionStorage.clear();
+          this.router.navigate(["login"]);
           this.loggingService.log("From http-error interceptor: refresh token not in the db")    
         }
         //default refresh attempt
@@ -42,6 +46,12 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
         if(error.status === 500 && error.url?.includes("logout")){
           this.authenticationService.refreshTokenForLogout();
           this.loggingService.log("From http-error interceptor: refresh for logout attempt")
+        }
+        //refresh token expired
+        if(error.status === 410){
+          sessionStorage.clear();
+          this.loggingService.log("From http-error interceptor: refresh token expired")
+          this.router.navigate(["login"]);
         }
         throw error
       }) 

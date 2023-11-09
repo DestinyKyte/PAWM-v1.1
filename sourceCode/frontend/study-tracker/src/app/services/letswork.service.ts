@@ -49,6 +49,16 @@ export class WorkService {
     });
   }
 
+  public deleteSession(session: Session){
+    this.httpClient.delete(`${environment.apiSecuredUrls}/sessions/${session.name}`).subscribe({
+      next: r => {
+        this.openSnackBar("session deleted successfully");
+        location.reload();
+    },
+      error: e => this.openSnackBar("session no longer exists")
+    });
+  }
+
   openSnackBar(message: string) {
     this._snackBar.open(message, 'Close', { duration: 5000 });
   }

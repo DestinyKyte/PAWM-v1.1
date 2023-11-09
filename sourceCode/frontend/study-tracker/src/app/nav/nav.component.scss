@@ -2,6 +2,7 @@
     background-color: rgb(30, 179, 216);
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     width: clamp(950px,100%, 100vw);
 
     height: 90px;
@@ -67,4 +68,10 @@
     background-color: rgb(206, 191, 213);
     color: #81087b;
     transition: .9s;
+}
+
+@media (max-width: 1099px){
+    .navbar {
+        height: 180px;
+    }
 }

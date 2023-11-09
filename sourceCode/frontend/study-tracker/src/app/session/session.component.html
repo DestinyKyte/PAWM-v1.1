@@ -1,12 +1,12 @@
 
 <div class="session-window" id="session-window">
-    <div class="session-card-container" *ngFor="let session of sessions">  
+    <div class="session-card-container" *ngFor="let session of sessions; let i = index">  
       <div class="session-card">
             <button type="button" class="edit-button" name="edit-button">
                 <span class="material-symbols-outlined">edit</span>
             </button>
             <button type="button" class="delete-button" name="delete-button">
-                <span class="material-symbols-outlined">delete</span>
+                <span class="material-symbols-outlined" (click)="deleteSession(session)">delete</span>
             </button>
             <body class="card-body">
                 <p class="big-font">{{session.name}}</p>
