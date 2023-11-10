@@ -1,38 +1,45 @@
-
-
- <div class="session-summary" id="session-summary">
-  <div>
-    <h1 class="session-summary-head">Good Job</h1>
-  </div>
-  <br>
-   <div>
-    <h2 id="session-completed-tasks">Completed tasks</h2>
-    <div *ngFor="let goal of goals; let i = index">
-      <input type="checkbox" [value]="goal"  (change)="verifyBoxChecked($event, goal, i)"> {{ goal }}
+<div class="summary-box">
+  <div class="session-summary" id="session-summary">
+    <div>
+      <h1 class="session-summary-head">Good Job</h1>
     </div>
-  </div>
-
-  <br>
-
-  <div>
-    <h2 id="session-focus">Level of focus</h2>
-    <div id="session-focus-level">
-      <label for="session-focus-level-in">value: </label>
-      <input id="session-focus-level-in" type="range" min="0" max="10" [(ngModel)]="focusValue" name="focusValue" title="satisfaction-level">
-      <p id="session-focus-level-out">focus value: {{ focusValue }}</p>
-    </div>
-  </div>
-
-  <br>
-
-  <div>
-    <h2 id="session-distractions">Distractions</h2>
-    <div name="" id="session-options">
-      <div *ngFor="let distraction of distractions">
-        <input type="checkbox" [value]="distraction"  name="selectedDistractions">
-        {{ distraction }}
+    <br>
+     <div>
+      <h2 id="session-completed-tasks">Completed tasks</h2>
+      <div *ngFor="let goal of goals; let i = index">
+        <input type="checkbox" [value]="goal"  (change)="verifyBoxChecked($event, goal, i)"> {{ goal }}
       </div>
     </div>
-  </div>
-  <button class="track-btn" type="button" id="session-summary-track-button" (click)="track()">track</button>
+  
+    <br>
+  
+    <div>
+      <h2 id="session-focus">Level of focus</h2>
+      <div id="session-focus-level">
+        <label for="session-focus-level-in">value: </label>
+        <input class="session-focus-level-in" id="session-focus-level-in" type="range" min="0" max="10" [(ngModel)]="focusValue" name="focusValue" title="satisfaction-level">
+        <p id="session-focus-level-out">focus value: {{ focusValue }}</p>
+      </div>
+    </div>
+  
+    <br>
+  
+    
+    <button class="track-btn" type="button" id="session-summary-track-button" (click)="track()">track</button>
+  </div>  
+
 </div>
+
+ <!-- 
+
+<div>
+      <h2 id="session-distractions">Distractions</h2>
+      <div name="" id="session-options">
+        <div *ngFor="let distraction of distractions">
+          <input type="checkbox" [value]="distraction"  name="selectedDistractions">
+          {{ distraction }}
+        </div>
+      </div>
+    </div>
+
+  -->

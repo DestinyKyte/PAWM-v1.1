@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RegistrationModel } from '../models/registrationModel';
 import { LoginService } from '../services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +42,10 @@ CHARACTERS MEANING IN REGULAR EXPRESSIONS
 - x*	=> Checks for x 0 or more times
 */
   
-  constructor(private service: LoginService){
+  constructor(
+    private service: LoginService,
+    private _snackbar: MatSnackBar
+    ){
     //if the password has at least:
     //- one lowercase letter (?=.*[a-z]), 
     //- one uppercase letter (?=.*[A-Z]), 
@@ -56,15 +60,20 @@ CHARACTERS MEANING IN REGULAR EXPRESSIONS
     //if the password entered does not meet the strong or medium-level requirements, then it is deemed weak
   }
 
-  register(form: RegistrationModel){
-    console.log(form);
-    this.service.register(form).subscribe({
-      next: response => {
-        console.log(response); 
-        alert("registration successful!")
-      },
-      error: () => {throw new Error("Failed to register. Email already exists. Please login");}
-    })
+  register(form: RegistrationModel) {
+    if (this.IsEmail(form.email)) {
+      console.log(form);
+      this.service.register(form).subscribe({
+        next: response => {
+          console.log(response);
+          alert("registration successful!")
+        },
+        error: () => { this.openSnackBar("Failed to register. Email already exists. Please login") }
+      })
+    }
+    else {
+      this.openSnackBar("invalid email syntax");
+    }
   }
 
   strengthChecker(passwordParameter: any) {
@@ -100,6 +109,14 @@ CHARACTERS MEANING IN REGULAR EXPRESSIONS
     } else {
       this.usernameIsEmpty = false
     }
+  }
+   IsEmail(email: string) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
+  openSnackBar(message: string) {
+    this._snackbar.open(message, 'x', { duration: 5000 });
   }
 
 }

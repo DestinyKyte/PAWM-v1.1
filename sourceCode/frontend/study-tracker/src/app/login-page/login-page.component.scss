@@ -1,0 +1,37 @@
+.login-page{
+    position: relative;
+    top: 10vh;
+    display: grid;
+    place-content: center;
+    border-radius: 4px;
+    //flex-direction: column;
+    //justify-content: center;
+    color: white;
+    background-color: lightseagreen;
+    width: 20vw;
+    height: 40vh;
+    overflow: auto;
+}
+.login-page-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.login-page-btn{
+    color: lightseagreen;
+    background-color: white;
+    width: 5vw;
+    height: 5vh;
+    border: none;
+    border-radius: 4px;
+    place-self: center;
+    cursor: pointer;
+}
+.login-page-form input{
+    color: lightseagreen;
+    background-color: white;
+    width: 15vw;
+    height: 3.5vh;
+    border-radius: 4px;
+    border: none;
+}

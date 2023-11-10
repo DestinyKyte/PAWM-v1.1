@@ -1,11 +1,18 @@
 .main-container{
-    display: block;
-    width: clamp(950px,100%, 99.9vw);
-    height: clamp(700px,100vh, 1080px);
-    color: white;
-    background: linear-gradient(45deg, #80d4da 20%, #b4e3b8 25%,#2b8733 65%, #1aacc6 95%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    //justify-content: center;
+    //width: clamp(950px,100%, 99.9vw);
+    //height: clamp(700px,100vh, 1080px);
+    height: 100%;
+    width: 100%;
+    //color: white;
+    //background: linear-gradient(45deg, #80d4da 20%, #b4e3b8 25%,#2b8733 65%, #1aacc6 95%);
+    background: linear-gradient(45deg, lightseagreen, white, lightseagreen);
+    padding-top: 100px;
 }
-.session-box{
+/*.session-box{
     position: relative;
     display: grid;
     place-items: center;
@@ -21,6 +28,6 @@
     transform: translate(16vw, 0vh); 
     overflow: auto;   
 
-}
+}*/
 
 

@@ -1,21 +1,28 @@
 .charts{
-    position:absolute;
-    top: 0px;
-    left: 0px;
-    place-items: center
+    display: flex;
+    flex-direction: column;
+    //position:absolute;
+    //top: 0px;
+    //left: 0px;
+    place-items: center;
+    place-self: center;
+    overflow: auto;
 }
 
 .charts button{
-    color:  #000000;
-    background: linear-gradient(30deg,
-     #b4e3b8 20%, #88b2c0 40%,
-      #20b9d7 60%, #098e8e 80% );
-      margin-left: 5px;
-      border-radius: 5px;
+    color: lightseagreen;
+    background-color: white;
+    width: 5vw;
+    height: 5vh;
+    border: none;
+    border-radius: 4px;
+    place-self: center;
+    cursor: pointer;
+    margin-right: 2.5%;
 }
 
 .charts button:hover{
-    background-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     background: rgb(206, 191, 213);
     transition: .9s;
 }
@@ -24,4 +31,18 @@
     width: 1170px;
     height: auto;
     margin: 15px;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+.charts-daychart-currentday{
+    margin-left: 5px;
+    color: lightseagreen;
+}
+.charts-single-grouping{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 35vw;
+  
 }

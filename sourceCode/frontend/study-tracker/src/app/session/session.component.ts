@@ -24,7 +24,7 @@ export class SessionComponent{
 
   ngOnInit(){
     if(sessionStorage.getItem("accessToken")){
-      this.getSessions()   
+      this.getSessions();
     } else {
       this.openSnackBar("Please login to see your sessions")
       throw new Error("Unauthorized data access attempt")
@@ -33,9 +33,11 @@ export class SessionComponent{
 
   public getSessions(): void{
     this.sessionService.getUserSessions().subscribe({
-      next:(Response: Session[]) => {
-        this.sessions = Response;
+      next:(response: Session[]) => {
+        this.sessions = response;
         this.datacenter.setAllSessions(this.sessions)
+        if( response.length == 0)
+          this.openSnackBar("You currently have no sessions created") 
       }
     })
   }
@@ -45,7 +47,7 @@ export class SessionComponent{
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, 'Close', { duration: 5000 });
+    this._snackBar.open(message, 'x', { duration: 5000 });
   }
 
 }

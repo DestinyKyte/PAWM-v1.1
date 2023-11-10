@@ -30,7 +30,7 @@ AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenService refreshTokenService;
 
-    public RegistrationResponse register(RegisterRequest request) throws Exception{
+    public ResponseEntity<RegistrationResponse> register(RegisterRequest request) throws Exception{
         var user = User.builder()
                 .firstName(request.getFirstname())
                 .lastname(request.getLastname())
@@ -39,13 +39,14 @@ AuthenticationService {
                 .role(Role.USER)
                 .build();
         if(repository.findByEmail(user.getEmail()).isPresent())
-            throw new Exception("Email already Exists. Please login");
+            return new ResponseEntity<>(HttpStatus.FOUND);
         repository.save(user);
         //var jwtToken = jwtService.generateToken(user);
-        return RegistrationResponse
+        var response = RegistrationResponse
                 .builder()
                 .reply("Registration Successful")
                 .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     public JwtAuthenticationResponse authenticate(AuthenticationRequest request) {

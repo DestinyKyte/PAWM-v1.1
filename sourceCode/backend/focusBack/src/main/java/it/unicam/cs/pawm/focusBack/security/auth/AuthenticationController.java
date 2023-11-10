@@ -23,7 +23,7 @@ public class AuthenticationController {
     public ResponseEntity<RegistrationResponse> register(
             @RequestBody RegisterRequest request
     ) throws Exception {
-        return ResponseEntity.ok(authenticationService.register(request));
+        return authenticationService.register(request);
     }
     @PostMapping("/authenticate")
     public ResponseEntity<JwtAuthenticationResponse> authenticate(

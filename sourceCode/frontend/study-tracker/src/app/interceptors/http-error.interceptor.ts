@@ -53,6 +53,10 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
           this.loggingService.log("From http-error interceptor: refresh token expired")
           this.router.navigate(["login"]);
         }
+        //user already exists in registration attempt
+        if(error.status === 302){
+          this.loggingService.log("From http-error interceptor: user already exists")
+        }
         throw error
       }) 
     )

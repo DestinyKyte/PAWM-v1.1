@@ -1,17 +1,17 @@
-<link 
+<!-- <link 
   href= "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
   rel="stylesheet" 
   integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
-  crossorigin="anonymous">
+  crossorigin="anonymous"> -->
 
 <div [routerLink]="'/register'">
-  <h1>COMPLETE THE FORM TO REGISTER</h1>
   
-  <form #regform="ngForm" (ngSubmit)="register(regform.value)">
+  
+  <form class="registration-form" #regform="ngForm" (ngSubmit)="register(regform.value)">
+    <h2 class="registration-form-header">Complete the form to register</h2>
+    <input  #username type="email" id="username" name="email" class="form-control" placeholder="Username" (input)="onInput(username.value)" required autofocus ngModel >
     
-    <input #username type="text" id="username" name="email" class="form-control" placeholder="Username" (input)="onInput(username.value)" required autofocus ngModel >
-    
-    <input #passwordInput type="password" id="password" name="password" placeholder="Password" class="form-control" (input)="checkStrength(passwordInput.value)" required ngModel>
+    <input  #passwordInput type="password" id="password" name="password" placeholder="Password" class="form-control" (input)="checkStrength(passwordInput.value)" required ngModel>
     <div [ngSwitch]="passwordStrength">
       <div *ngSwitchCase="'strong'">
         <span *ngIf="isVisible" class="badge displayBadge" style="background-color: green; display: block;">Strong</span>
@@ -19,7 +19,7 @@
       <div *ngSwitchCase="'medium'">
         <span *ngIf="isVisible" class="badge displayBadge" style="background-color: blue; display: block;">Medium</span>
       </div>
-      <div *ngSwitchCase="'weak'">
+      <div class="badge-window" *ngSwitchCase="'weak'">
         <span *ngIf="isVisible" class="badge displayBadge" style="background-color: red; display: block;">Weak</span>
       </div>
     </div>
@@ -28,7 +28,7 @@
     
     <input type="text" id="lastName" name="lastname" placeholder="lastName" class="form-control" required ngModel>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="this.passwordIsUnsecure || this.usernameIsEmpty">register</button>
+    <button class="registration-form-btn" type="submit" [disabled]="this.passwordIsUnsecure || this.usernameIsEmpty">register</button>
   
   </form>
 

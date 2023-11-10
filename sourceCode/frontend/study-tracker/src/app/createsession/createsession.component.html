@@ -1,20 +1,20 @@
-<div id="creation-box" class="creation-box">
+
     <form #createSessionForm="ngForm" (ngSubmit)="createSession(createSessionForm.value)" class="creation-form">
-        <label for="creation-session-name" class="creation-label">Enter name: </label>
+        <label for="creation-session-name" class="creation-label"><h2>Enter name: </h2></label>
         <input type="text" ngModel name="name" id="creation-session-name" class="creation-input" placeholder="enter session name">
-        <br>
-        <label for="creation-session-minutes" class="creation-label">Minutes: </label>
+    
+        <label for="creation-session-minutes" class="creation-label"><h2>Minutes: </h2></label>
         <input type="number" id="creation-session-minutes" class="creation-input" placeholder="0" ngModel name="minutes">
-        <br>
-        <label for="creation-session-ringtone" class="creation-label">Ringtone: </label>
+        
+        <label for="creation-session-ringtone" class="creation-label"><h2>Ringtone: </h2></label>
         <input type="url" id="creation-session-ringtone" class="creation-input" placeholder="currently inactive" ngModel name="ringtone" disabled="">
-        <br>
+        
         <button class="creation-btn">create</button>
     </form>
-    <dialog close>
+  <!--   <dialog close>
         <p>session created!</p>
         <form method="dialog">
           <button>OK</button>
         </form>
-    </dialog>
-</div>
+    </dialog> -->
+    <!-- <div id="creation-box" class="creation-box"></div> -->

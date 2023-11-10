@@ -1,16 +1,18 @@
 .welcome-page{
     overflow: auto;
     position: relative;
-    border: 5px solid greenyellow;
-    background: whitesmoke;
-    color: black;
+    //border: 5px solid greenyellow;
+    background:lightseagreen;
+    color: white;
     padding: 10px;
     height: 60vh;
 }
 
 .highlight{
-    color: rgb(0, 0, 0);
-    background-color: blanchedalmond;
+    //color: rgb(0, 0, 0);
+    //background-color: blanchedalmond;
+    
+    font-weight: bold;
 }
 .site-meme{
     position: relative;
@@ -18,7 +20,7 @@
     top: 100px;
     transform: scale(3);
     max-height: 80px;
-    border: 4px solid;
+    //border: 4px solid;
     border-radius: 10px;
-    background-color: rgb(22, 214, 105);  
+    //background-color: rgb(22, 214, 105);  
 }

@@ -1,14 +1,18 @@
 <div class="session-start" id="session-start-form">
     <div class="session-goals">
       <input type="text" class="form-control" id="session-goal-input" placeholder="enter a goal" [(ngModel)]="newGoal">
-      <div class="add-remove-btn">
-        <button type="button" class="add-btn" (click)="addGoal()">Add Goal</button>
-      </div>
+  
+        <a class="add-remove-btn"><button type="button" class="add-btn" (click)="addGoal()">Add Goal</button></a>
+      
     </div>
     <ul id="dynamic-list">
       <li *ngFor="let goal of goals; let i = index">{{ goal }} 
-        <button type="button" class="remove-btn" (click)="removeGoal(i)">Remove</button>
+        <button type="button" class="remove-btn" (click)="removeGoal(i)"><span class="material-symbols-outlined">
+          delete
+          </span></button>
       </li>
     </ul>
-    <button type="button" class="begin-btn" id="begin-btn" routerLink="timer">Begin</button>
+    <div class="session-begin-btn">
+        <button type="button" class="begin-btn" id="begin-btn" routerLink="timer">Begin</button>
+    </div>
 </div>

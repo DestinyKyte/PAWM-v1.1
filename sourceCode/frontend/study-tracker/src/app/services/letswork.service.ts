@@ -60,7 +60,7 @@ export class WorkService {
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, 'Close', { duration: 5000 });
+    this._snackBar.open(message, 'x', { duration: 5000 });
   }
 
 }

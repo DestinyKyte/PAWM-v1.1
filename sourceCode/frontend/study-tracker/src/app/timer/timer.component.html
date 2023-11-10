@@ -6,12 +6,12 @@
     </div>
     <div class="timer-frame">
         <div class="timer-numbers">
-            <span class="timer_minute" id="timer_minutes" >{{minutes}}</span>
-            <span class="timer_semicolon">:</span>
-            <span class="timer_seconds" id="timer_seconds">{{seconds}}</span>
+            <span class="timer-value" id="timer_minutes" >{{minutes}}</span>
+            <span class="timer-value">:</span>
+            <span class="timer-value" id="timer_seconds">{{seconds}}</span>
         </div>
         
-        <div>
+        <div class="timer-btns">
             <button type="button" class="timer-start-btn" (click)="startTimer()" id="timer-start-btn" [ngStyle]="{display:playDisplay}">
                 <span class="material-symbols-outlined">
                     play_circle

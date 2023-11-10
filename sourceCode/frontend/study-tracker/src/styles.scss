@@ -2,13 +2,23 @@
 *{
     padding: 0px 0px;
     margin: 0px 0px;
-    box-sizing: border-box;
+    //box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
 }
-.outer-container{
-    display: block;
-    width: clamp(920px, 100%, 100vw);
-    height: clamp(600px, 720px, 100vh);
+.mat-mdc-snack-bar-container {
+    --mat-mdc-snack-bar-button-color: rgb(25, 132, 70);
+    --mdc-snackbar-container-color: rgb(206, 191, 213);
+    --mdc-snackbar-supporting-text-color: white;
 }
+/* .outer-container{//sets the values for the main view. Serves as a container for container
+    display: block;
+    //width: clamp(920px, 100%, 100vw);
+    //height: clamp(600px, 720px, 100vh);
+    //height: 100vh;
+    height: 2180px; 
+    width: 100vw;
+} */
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
