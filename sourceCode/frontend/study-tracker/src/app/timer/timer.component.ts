@@ -51,9 +51,11 @@ export class TimerComponent {
         if (this.timeToCount == 0) {
           this.resetTimer();
           this.showSummary();
+          this.playAudio();
           return;
         }
         var minuteValue = Math.floor(this.timeToCount / 60);
+        //(Math.floor(this.timeToCount / 60) < 10 ? "0" + minuteValue : "" + minuteValue)
         var secValue = Math.floor((this.timeToCount % 60));
         this.minutes = (minuteValue < 10 ? "0" + minuteValue : "" + minuteValue);
         this.seconds = secValue < 10 ? "0" + secValue : "" + secValue;
@@ -89,6 +91,13 @@ export class TimerComponent {
   public showSummary(){
     this.router.navigate(["summary"]);
   } 
+
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../assets/sound/Cold Killa (Sting) - MK2.mp3"; 
+    audio.load();
+    audio.play();
+  }
   
 }
 

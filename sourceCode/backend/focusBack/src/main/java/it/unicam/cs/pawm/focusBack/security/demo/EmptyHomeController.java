@@ -1,8 +1,10 @@
 package it.unicam.cs.pawm.focusBack.security.demo;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 @RestController
 //@Controller
@@ -16,8 +18,9 @@ public class EmptyHomeController {
 
     //funziona con @Controller e dentro resources/templates
     @GetMapping("/")
-    public String getTest(){
-        return "index";
+    public int getTest(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.getFirstDayOfWeek();
     }
 
     /*

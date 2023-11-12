@@ -27,6 +27,11 @@
     place-self: center;
     cursor: pointer;
 }
+.login-page-btn:hover{
+    background-color: rgb(206, 191, 213);
+    color: white;
+    transition: .9s;
+}
 .login-page-form input{
     color: lightseagreen;
     background-color: white;
@@ -34,4 +39,20 @@
     height: 3.5vh;
     border-radius: 4px;
     border: none;
+}
+
+
+@media (max-width: 920px) {
+    .login-page{
+        height: 50vh;
+        width: 80vw;
+    }
+    .login-page-form input{
+        width: 45vw;
+        height: 3.5vh;
+      
+    }
+    .login-page-btn{
+        width: 30vw;
+    }
 }

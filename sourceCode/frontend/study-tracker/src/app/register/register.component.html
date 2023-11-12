@@ -3,15 +3,16 @@
   rel="stylesheet" 
   integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
   crossorigin="anonymous"> -->
+  <!-- 
 
-<div [routerLink]="'/register'">
-  
+    we had a div with router link to register but it was unnecessary
+   -->
   
   <form class="registration-form" #regform="ngForm" (ngSubmit)="register(regform.value)">
     <h2 class="registration-form-header">Complete the form to register</h2>
-    <input  #username type="email" id="username" name="email" class="form-control" placeholder="Username" (input)="onInput(username.value)" required autofocus ngModel >
+    <input  #username type="email" id="username" name="email" class="form-control" placeholder="Email" (input)="onInput(username.value)" required autofocus ngModel >
     
-    <input  #passwordInput type="password" id="password" name="password" placeholder="Password" class="form-control" (input)="checkStrength(passwordInput.value)" required ngModel>
+    <input  #passwordInput type="password" id="password" name="password" placeholder="Password" title="1 (!#*@...) + 1 (A-Z) + 1 (a-z) + 1 (0-9) + at least 8 characters long in any order"  class="form-control" (input)="checkStrength(passwordInput.value)" required ngModel>
     <div [ngSwitch]="passwordStrength">
       <div *ngSwitchCase="'strong'">
         <span *ngIf="isVisible" class="badge displayBadge" style="background-color: green; display: block;">Strong</span>
@@ -31,5 +32,3 @@
     <button class="registration-form-btn" type="submit" [disabled]="this.passwordIsUnsecure || this.usernameIsEmpty">register</button>
   
   </form>
-
-</div>

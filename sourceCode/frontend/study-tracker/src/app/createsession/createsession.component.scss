@@ -49,4 +49,17 @@
     background: rgb(206, 191, 213);
     transition: .9s;
 }
-
+@media (max-width: 920px) {
+    .creation-form{
+        height: 60vh;
+        width: 80vw;
+    }
+    .creation-input{
+        width: 45vw;
+        height: 3.5vh;
+      
+    }
+    .creation-btn{
+        width: 30vw;
+    }
+}

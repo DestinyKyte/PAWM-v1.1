@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorCatchingInterceptor implements HttpInterceptor {
+  redirectsCounter = 0;
   
   constructor(
     private authenticationService: LoginService,
@@ -29,32 +30,38 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
         this.loggingService.log("request caught in error interceptor")
         //header without a token
         if(error.status === 403){ 
+          this.redirectsCounter=0;
           throw new Error("From http error interceptor: header without a token")
         }
         //refresh token not in the db
         if(error.status === 401){ 
+          this.redirectsCounter=0;
           sessionStorage.clear();
           this.router.navigate(["login"]);
           this.loggingService.log("From http-error interceptor: refresh token not in the db")    
         }
         //default refresh attempt
-        if(error.status === 500 && !error.url?.includes("logout")){
+        if(error.status === 500 && !error.url?.includes("logout") && this.redirectsCounter<5){
+          this.redirectsCounter++;            
           this.authenticationService.refreshToken();
           this.loggingService.log("From http-error interceptor: default refresh attempt")
         }
         //refresh for logout attempt
         if(error.status === 500 && error.url?.includes("logout")){
+          this.redirectsCounter=0;
           this.authenticationService.refreshTokenForLogout();
           this.loggingService.log("From http-error interceptor: refresh for logout attempt")
         }
         //refresh token expired
         if(error.status === 410){
+          this.redirectsCounter=0;
           sessionStorage.clear();
           this.loggingService.log("From http-error interceptor: refresh token expired")
           this.router.navigate(["login"]);
         }
         //user already exists in registration attempt
         if(error.status === 302){
+          this.redirectsCounter=0;
           this.loggingService.log("From http-error interceptor: user already exists")
         }
         throw error

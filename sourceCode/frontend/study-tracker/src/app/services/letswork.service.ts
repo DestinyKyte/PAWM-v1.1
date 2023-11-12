@@ -32,9 +32,10 @@ export class WorkService {
             if(error.status === 406){
               this.openSnackBar("A session with this name already exists")
               throw new Error("A session with this name already exists")
-            } else {
-              alert("Page will reload. Go to let's work to see your new session")
             }
+            /*  else {
+              alert("Page will reload. Go to let's work to see your new session")
+            } */
           }
       })
     } else {
@@ -45,7 +46,7 @@ export class WorkService {
   public trackSession(entry: {}){
     this.httpClient.post<{}>(`${environment.apiSecuredUrls}/entries`, entry).subscribe({
       next: () => this.router.navigate(["dashboard"]),
-      error: () => alert("Page will reload. Go to dashboard to see your new entry")
+      //error: () => alert("Page will reload. Go to dashboard to see your new entry")
     });
   }
 
@@ -53,7 +54,7 @@ export class WorkService {
     this.httpClient.delete(`${environment.apiSecuredUrls}/sessions/${session.name}`).subscribe({
       next: r => {
         this.openSnackBar("session deleted successfully");
-        location.reload();
+        //location.reload();
     },
       error: e => this.openSnackBar("session no longer exists")
     });

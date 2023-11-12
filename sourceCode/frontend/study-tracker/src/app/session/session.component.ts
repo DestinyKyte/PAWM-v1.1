@@ -4,6 +4,7 @@ import { DataSharingSerivce } from '../services/shared.service';
 import { WorkService } from '../services/letswork.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class SessionComponent{
   constructor(
     private sessionService: WorkService, 
     private datacenter: DataSharingSerivce, 
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(){
@@ -44,6 +46,8 @@ export class SessionComponent{
 
   public deleteSession(session: Session){
     this.sessionService.deleteSession(session);
+    this.router.navigate(["letswork"]);
+    
   }
 
   openSnackBar(message: string) {

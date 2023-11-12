@@ -66,7 +66,7 @@ CHARACTERS MEANING IN REGULAR EXPRESSIONS
       this.service.register(form).subscribe({
         next: response => {
           console.log(response);
-          alert("registration successful!")
+          this.openSnackBar("registration successful!")
         },
         error: () => { this.openSnackBar("Failed to register. Email already exists. Please login") }
       })

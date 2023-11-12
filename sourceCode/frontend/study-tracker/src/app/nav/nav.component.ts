@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-nav',
@@ -18,5 +19,6 @@ export class NavComponent {
     this.authenticationService.logout()
     this.router.navigate(["login"])
   }
+
 
 }

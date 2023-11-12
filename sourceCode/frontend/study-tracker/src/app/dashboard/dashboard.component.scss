@@ -1,4 +1,6 @@
 .charts{
+    position: relative;
+    top: 10vh;
     display: flex;
     flex-direction: column;
     //position:absolute;
@@ -7,6 +9,7 @@
     place-items: center;
     place-self: center;
     overflow: auto;
+   
 }
 
 .charts button{

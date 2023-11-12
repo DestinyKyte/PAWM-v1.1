@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.*;
 
 @Service
@@ -27,11 +28,21 @@ public class EntryService {
         }
         entry.setUserId(userToUpdate.getId());
 
+
+        //Calendar calendar = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         entry.setYear(calendar.get(Calendar.YEAR));
         entry.setDayOfTheYear(calendar.get(Calendar.DAY_OF_YEAR));
         entry.setHourOfTheDay(calendar.get(Calendar.HOUR_OF_DAY));
+
+/*        if(calendar.get(Calendar.DAY_OF_WEEK) == 1)
+            entry.setWeekOfTheYear(calendar.get(Calendar.WEEK_OF_YEAR) +1);
+        else
+            entry.setWeekOfTheYear(calendar.get(Calendar.WEEK_OF_YEAR));*/
+
         entry.setWeekOfTheYear(calendar.get(Calendar.WEEK_OF_YEAR));
+
         entry.setDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
         entry.setMonth(calendar.get(Calendar.MONTH));
 

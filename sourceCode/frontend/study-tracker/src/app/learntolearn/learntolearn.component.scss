@@ -1,4 +1,6 @@
 .welcome-page{
+    position: relative;
+    top: 10vh;
     background: lightseagreen;
     color: white;
     padding: 20px;
@@ -11,4 +13,14 @@
 }
 .welcome-page-ref-link a{
     color: white;
+}
+
+@media (max-width: 920px) {
+    .welcome-page{
+        height: 50vh;
+        width: 80vw;
+    }
+    .welcome-page h1{
+        font-size: 2vh;
+    }
 }

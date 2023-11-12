@@ -52,6 +52,8 @@ export class SummaryComponent implements OnInit {
       quality: focusLevel
     }
     if (minutes != undefined) {
+      if(Number.isNaN(entry.completedTasks))
+        entry.completedTasks = 0;
       this.sessionService.trackSession(entry)
     }
     return entry;

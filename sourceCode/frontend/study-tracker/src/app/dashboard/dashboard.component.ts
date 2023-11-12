@@ -303,7 +303,10 @@ export class DashboardComponent{
     let currentDate = new Date();
     let startDate = new Date(currentDate.getFullYear(), 0, 1);
     //siccome lato frontend la settimana inizia di lunedi', devo aggiungere 1 al risultato di getDay per sincronizzarlo con il backend che invece fa iniziare la settimana di domenica
-    this.weekOfTheYear = Math.ceil((((currentDate.getTime() - startDate.getTime()) / 86400000) + startDate.getDay() + 1) / 7);
+    //*COMMENT (((startDate-currentdate = number of ms remaining in the year)/(number of ms in a day) = number of days remaining in a year))/(number of days in a week) = number of weeks left in a year) -1
+   //this.weekOfTheYear = Math.ceil(((((currentDate.getTime() - startDate.getTime()) / 86400000) + startDate.getDay() + 1) / 7));
+    //*COMMENT weeks = milliseconds ÷ 604,800,000
+    this.weekOfTheYear = Math.ceil( (currentDate.getTime() - startDate.getTime()) / 604800000);
   }
 
   computeDayOfTheYear(){

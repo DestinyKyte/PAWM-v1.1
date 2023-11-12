@@ -1,11 +1,16 @@
 .welcome-page{
+    display: flex;
+    flex-direction: column;
     overflow: auto;
     position: relative;
+    top: 10vh;
     //border: 5px solid greenyellow;
     background:lightseagreen;
     color: white;
     padding: 10px;
     height: 60vh;
+    border-radius: 5px;
+
 }
 
 .highlight{
@@ -15,12 +20,27 @@
     font-weight: bold;
 }
 .site-meme{
-    position: relative;
+    /* position: relative;
     left: 450px;
-    top: 100px;
+    top: 100px; */
+    margin-top: 10vh;
+    place-self: center;
     transform: scale(3);
     max-height: 80px;
     //border: 4px solid;
     border-radius: 10px;
     //background-color: rgb(22, 214, 105);  
+}
+
+@media (max-width: 920px) {
+    .site-meme{
+        position: relative;
+        top: 0;
+        left: 0;
+        place-self: center;
+        margin-top: 10vh;
+        transform: scale(2.5);
+        max-height: 80px;
+        border-radius: 10px;  
+    }
 }

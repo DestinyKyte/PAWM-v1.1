@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     providedIn:'root'
 })
 export class HttpRecallService{
-    lastCall:any
+    lastCall:any;
 
     constructor(
         private httpClient : HttpClient,
